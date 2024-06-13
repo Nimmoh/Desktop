@@ -17,3 +17,6 @@ class FlexMoneyTransferApp extends StatelessWidget {
     );
   }
 }
+
+class StatelessWidget {
+}
