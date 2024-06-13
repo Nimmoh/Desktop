@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../controllers/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -15,20 +16,25 @@ class LoginPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  'Welcome Back!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red,
-                  ),
+                Image.asset(
+                  'assets/images/flex_logo.png', 
+                  height: 100,
+                  width: 100,
                 ),
+                // Text(
+                //   'Welcome To Flex',
+                //   textAlign: TextAlign.center,
+                //   style: TextStyle(
+                //     fontSize:20,
+                //     fontWeight: FontWeight.bold,
+                //     color: Colors.black,
+                //   ),
+                // ),
                 SizedBox(height: 16),
                 TextField(
-                  onChanged: (value) => _loginController.email.value = value,
+                  onChanged: (value) => _loginController.phone.value = value,
                   decoration: InputDecoration(
-                    labelText: 'Email',
+                    labelText: 'Phone Number',
                   ),
                 ),
                 SizedBox(height: 16),
@@ -50,7 +56,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   child: Text(
                     'Login',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    style: TextStyle(fontSize: 18, color: Colors.black),
                   ),
                 ),
                 SizedBox(height: 16),
@@ -60,7 +66,7 @@ class LoginPage extends StatelessWidget {
                   },
                   child: Text(
                     'Don\'t have an account? Register',
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: Colors.blueGrey),
                   ),
                 ),
               ],

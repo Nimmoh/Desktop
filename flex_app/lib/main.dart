@@ -1,3 +1,4 @@
+import 'package:flex_app/controllers/auth_controller.dart';
 import 'package:flex_app/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'home_page.dart';
 import 'login_page.dart';
 
 void main() {
+  Get.put(AuthController());
   runApp(MyApp());
 }
 
@@ -18,13 +20,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         primaryColor: Colors.red,
         hintColor: Colors.black,
-        scaffoldBackgroundColor: Colors.blueGrey,
+        scaffoldBackgroundColor: Color.fromARGB(255, 238, 214, 214),
         textTheme: TextTheme(
           bodyLarge: TextStyle(color: Colors.white),
           bodyMedium: TextStyle(color: Colors.white),
         ),
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.white,
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

@@ -39,6 +39,7 @@ dependencies:
   
   carousel_slider: ^4.2.1
   get: ^4.6.6
+  flutter_launcher_icons: ^0.13.1
   
 
 dev_dependencies:
@@ -50,7 +51,7 @@ dev_dependencies:
 flutter_launcher_icons:
       android: "launcher_icon"
       ios: true
-      image_path: "assets/images/Flex_logo.png"
+      image_path: "assets/images/flex_logo.png"
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -73,8 +74,13 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+  
   assets:
-    - assets/images/
+    - assets/images/card1.png
+    - assets/images/flex_logo.png
+    - assets/images/eye.png
+    - assets/images/qr_code.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
