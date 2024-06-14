@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Image.asset(
-                  'assets/images/flex_logo.png', 
+                  'assets/images/flex_logo.png',
                   height: 100,
                   width: 100,
                 ),
@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                   },
                   child: Text(
                     'Don\'t have an account? Register',
-                    style: TextStyle(color: Colors.blueGrey),
+                    style: TextStyle(color: Colors.black),
                   ),
                 ),
               ],

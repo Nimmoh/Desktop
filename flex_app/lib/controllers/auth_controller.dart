@@ -12,10 +12,25 @@ class User {
   get cards => null;
 }
 
+class Transaction {
+  final String title;
+  final String description;
+  final double amount;
+  final DateTime date;
+
+  Transaction({
+    required this.title,
+    required this.description,
+    required this.amount,
+    required this.date,
+  });
+}
+
 class AuthController extends GetxController {
   var isLoading = false.obs;
   var user = User(id: '', name: '', phone: '').obs;
   var walletBalance = 0.0.obs; // Observable for wallet balance
+  var transactions = <Transaction>[].obs; // Observable list of transactions
 
   void login(String phone, String password) {
     // Your login logic here
@@ -61,6 +76,13 @@ class AuthController extends GetxController {
     Future.delayed(Duration(seconds: 2), () {
       walletBalance.value += walletAmount;
       isLoading.value = false;
+      // Add transaction to history
+      addTransaction(Transaction(
+        title: 'Wallet Loaded',
+        description: 'You loaded $amount KES to your wallet.',
+        amount: walletAmount,
+        date: DateTime.now(),
+      ));
       // Show success message
       Get.snackbar(
         'Success',
@@ -76,6 +98,13 @@ class AuthController extends GetxController {
     // Simulating card loading for now
     Future.delayed(Duration(seconds: 2), () {
       isLoading.value = false;
+      // Add transaction to history
+      addTransaction(Transaction(
+        title: 'Card Loaded',
+        description: 'You loaded $amount KES from card $cardNumber.',
+        amount: double.tryParse(amount) ?? 0.0,
+        date: DateTime.now(),
+      ));
       // Show success message
       Get.snackbar('Success', 'Card loaded successfully');
     });
@@ -89,6 +118,14 @@ class AuthController extends GetxController {
     if (transferAmount > 0 && transferAmount <= currentBalance) {
       // Example logic to update wallet balance
       walletBalance.value -= transferAmount;
+
+      // Add transaction to history
+      addTransaction(Transaction(
+        title: 'Transfer to $recipient',
+        description: 'You transferred $amount KES to $recipient.',
+        amount: transferAmount,
+        date: DateTime.now(),
+      ));
 
       // Example: Show a success message
       Get.snackbar(
@@ -106,5 +143,13 @@ class AuthController extends GetxController {
         colorText: Colors.white,
       );
     }
+  }
+
+  void addTransaction(Transaction transaction) {
+    transactions.add(transaction);
+  }
+
+  List<Transaction> getTransactions() {
+    return transactions.toList();
   }
 }

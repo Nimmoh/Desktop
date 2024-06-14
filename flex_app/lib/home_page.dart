@@ -1,14 +1,11 @@
 import 'package:flex_app/controllers/auth_controller.dart';
+import 'package:flex_app/custom_bottom_navigation_bar.dart';
+import 'package:flex_app/transfer_page.dart'; // Import your transfer page
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'custom_bottom_navigation_bar.dart';
-import 'transfer_page.dart'; 
-
 class HomePage extends StatelessWidget {
   final AuthController _authController = Get.find();
-
-   HomePage({super.key}); // Ensure AuthController is properly registered
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +28,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flex'),
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back),
-        //   onPressed: () {
-        //     Get.back();
-        //   },
-        // ),
+        title: Text('Flex Money Transfer'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -283,14 +274,16 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(Icons.arrow_upward, size: 24, color: Colors.black),
+                        Icon(Icons.arrow_upward, size: 24, color: Colors.red),
+                        SizedBox(height: 11),
                         Text(
-                          'Transfer Money',
+                          'Tap to transfer money',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16,
+                            fontSize: 12,
                             fontFamily: 'Open Sans',
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w600,
+                            height: 0,
                           ),
                         ),
                       ],
@@ -298,6 +291,37 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            SizedBox(height: 24),
+            Text(
+              'Recent Activity',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Expanded(
+              child: Obx(() {
+                if (_authController.isLoading.value) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  var transactions = _authController.transactions.toList(); // Assuming transactions is an observable list in AuthController
+                  return ListView.builder(
+                    itemCount: transactions.length,
+                    itemBuilder: (context, index) {
+                      var transaction = transactions[index];
+                      return ListTile(
+                        title: Text(transaction.title),
+                        subtitle: Text(transaction.description),
+                        trailing: Text(transaction.amount.toString()),
+                        // Add more details as per your Transaction model
+                      );
+                    },
+                  );
+                }
+              }),
             ),
           ],
         ),
